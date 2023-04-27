@@ -1,36 +1,7 @@
-# bdlvmFormula -----------------------------------------------------------------
-# Not exported, S4 structure is only for handling by the package
-bdlvmFormula <- setClass(
-  "bdlvmFormula",
-  slots = c(lv_terms = "list", bf_terms = "list"),
-  prototype = list(lv_terms = list(), bf_terms = list())
-)
-
-# bdlvmlvterm ------------------------------------------------------------------
-bdlvmlvterm <- function(...) {
-  dots <- list(...)
-  argnames <- names(dots)
-
-  if(is.null(argnames)) {
-    formulas <- dots
-    args <- NULL
-  } else {
-    formulas <- dots[argnames == ""]
-    args <- dots[argnames != ""]
-  }
-
-  is_formula(formulas)
-
-  structure(
-    list(formulas = formulas, args = args),
-    class = "bdlvmlvterm"
-  )
-}
-
 # user-facing constructor ------------------------------------------------------
 #' Set up a latent variable formula for **brms**
 #'
-#' Set up an object that can be parsed by [bdlvm()] into a `brms` formula that constructs a latent variable and the associated manifest variables through which it's measured.
+#' Set up an object that can be parsed by`[parse_bdlvm()` into a `brms` formula that constructs a latent variable and the associated manifest variables through which it's measured.
 #'
 #' The first RHS term must be of the form `items(prefix, num)`, where `num` is an integer and `prefix` is an unquoted name that will be used to build the measurement variables, following the pattern `prefixLVi1` up to `prefixLVi{num}`. Additional terms on the RHS are interpreted as predictors on the latent variable's location parameter, as usual.
 #'
@@ -59,4 +30,33 @@ bdlvmlvterm <- function(...) {
 #'
 lv <- function(...) {
   bdlvmFormula() + bdlvmlvterm(...)
+}
+
+# bdlvmFormula (S4) ------------------------------------------------------------
+# Not exported, only for handling by the package
+bdlvmFormula <- setClass(
+  "bdlvmFormula",
+  slots = c(lv_terms = "list", bf_terms = "list"),
+  prototype = list(lv_terms = list(), bf_terms = list())
+)
+
+# bdlvmlvterm (S3) -------------------------------------------------------------
+bdlvmlvterm <- function(...) {
+  dots <- list(...)
+  argnames <- names(dots)
+
+  if(is.null(argnames)) {
+    formulas <- dots
+    args <- NULL
+  } else {
+    formulas <- dots[argnames == ""]
+    args <- dots[argnames != ""]
+  }
+
+  is_formula(formulas)
+
+  structure(
+    list(formulas = formulas, args = args),
+    class = "bdlvmlvterm"
+  )
 }
