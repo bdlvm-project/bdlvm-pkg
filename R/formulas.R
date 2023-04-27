@@ -61,13 +61,13 @@ make_bform <- function(x) {
   })
 
   bforms <- lapply(bforms, \(z) {
-    paste0("bf(", paste(sapply(z, \(w) deparse(w)), collapse = ", "), ")")
+    paste0("brms::bf(", paste(sapply(z, \(w) deparse(w)), collapse = ", "), ")")
   })
   # make item_x ~ mi(lv) terms
   iforms <- lapply(seq_along(all_lv), \(z) {
     prefix <- deparse(x$items[[z]][[2]])
     suffix <- seq_len(x$items[[z]][[3]])
-    paste0("bf(", prefix, "LVi", suffix, " ~ mi(", all_lv[z],"))")
+    paste0("brms::bf(", prefix, "LVi", suffix, " ~ mi(", all_lv[z],"))")
   })
 
   unlist(sapply(seq_along(all_lv), \(z)c(bforms[z], iforms[[z]])))
