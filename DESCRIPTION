@@ -17,3 +17,5 @@ Collate:
     'S4methods.R'
     'formulas.R'
     'misc.R'
+Imports: 
+    purrr
