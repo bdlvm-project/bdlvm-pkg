@@ -1,4 +1,15 @@
-#' @export parse_bdlvm
+#' Parse a latent variable formula into `brms` format
+#'
+#' @param x A formula created with [lv()]
+#'
+#' @return
+#' A set of `brms` formulas corresponding with `mi()` terms added as needed.
+#' 
+#' @export
+#'
+#' @examples
+#' library(bdlvm)
+#' parse_bdlvm(lv(y ~ items(x, 3)))
 parse_bdlvm <- function(x, ...) {
   UseMethod("parse_bdlvm")
 }
