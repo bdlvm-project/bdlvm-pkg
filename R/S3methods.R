@@ -45,7 +45,10 @@ parse_bdlvm.bdlvmlvterm <- function(x, ...) {
   items <- get_items(x)
   formulas <- drop_items(x, items)
 
-  list(formulas = formulas, resp = resp, items = items)
+  list(formulas = formulas,
+       resp = resp,
+       items = items,
+       args = x$args)
 }
 
 #' @method parse_bdlvm bdlvmbform
