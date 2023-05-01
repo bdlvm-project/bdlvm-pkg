@@ -1,6 +1,7 @@
 #' Parse a latent variable formula into `brms` format
 #'
 #' @param x A formula created with [lv()]
+#' @param eval Default `TRUE`, otherwise returns the deparsed `bf()` calls
 #'
 #' @return
 #' A set of `brms` formulas corresponding with `mi()` terms added as needed.
