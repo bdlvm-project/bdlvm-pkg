@@ -43,9 +43,9 @@ parse_bdlvm.list <- function(x, ..., transpose = FALSE) {
 parse_bdlvm.bdlvmlvterm <- function(x, ...) {
   resp <- get_response(x)
   items <- get_items(x)
-  clean_formulas <- drop_items(x, items)
+  formulas <- drop_items(x, items)
 
-  list(formulas = clean_formulas, resp = resp, items = items)
+  list(formulas = formulas, resp = resp, items = items)
 }
 
 #' @method parse_bdlvm bdlvmbform
