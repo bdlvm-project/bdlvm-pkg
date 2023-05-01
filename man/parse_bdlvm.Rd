@@ -8,6 +8,8 @@ parse_bdlvm(x, ...)
 }
 \arguments{
 \item{x}{A formula created with \code{\link[=lv]{lv()}}}
+
+\item{eval}{Default \code{TRUE}, otherwise returns the deparsed \code{bf()} calls}
 }
 \value{
 A set of \code{brms} formulas corresponding with \code{mi()} terms added as needed.
