@@ -1,7 +1,7 @@
 # user-facing constructor ------------------------------------------------------
 #' Set up a latent variable formula for **brms**
 #'
-#' Set up an object that can be parsed by [parse_bdlvm()] into a `brms` formula that constructs a latent variable and the associated manifest variables through which it's measured.
+#' Builds an S4 object that can be parsed by [parse_bdlvm()] into a `brms` formula.
 #'
 #' The first RHS term must be of the form `items(prefix, num)`, where `num` is an integer and `prefix` is an unquoted name that will be used to build the measurement variables, following the pattern `prefixLVi1` up to `prefixLVi{num}`. Additional terms on the RHS are interpreted as predictors on the latent variable's location parameter, as usual.
 #'

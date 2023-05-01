@@ -15,7 +15,7 @@ Any named argument is assumed to be a valid \code{\link[brms:brmsformula]{brms::
 An S4 object of class \code{bdlvmFormula}, which supports concatenation via \code{+} with \code{brms} formulas.
 }
 \description{
-Set up an object that can be parsed by \code{\link[=parse_bdlvm]{parse_bdlvm()}} into a \code{brms} formula that constructs a latent variable and the associated manifest variables through which it's measured.
+Builds an S4 object that can be parsed by \code{\link[=parse_bdlvm]{parse_bdlvm()}} into a \code{brms} formula.
 }
 \details{
 The first RHS term must be of the form \code{items(prefix, num)}, where \code{num} is an integer and \code{prefix} is an unquoted name that will be used to build the measurement variables, following the pattern \code{prefixLVi1} up to \verb{prefixLVi\{num\}}. Additional terms on the RHS are interpreted as predictors on the latent variable's location parameter, as usual.

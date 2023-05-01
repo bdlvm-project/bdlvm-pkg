@@ -1,10 +1,12 @@
 #' Parse a latent variable formula into `brms` format
+#' 
+#' Constructs a set of `brms` formulas that encode latent variables using `mi()`
 #'
 #' @param x A formula created with [lv()]
 #' @param eval Default `TRUE`, otherwise returns the deparsed `bf()` calls
 #'
 #' @return
-#' A set of `brms` formulas corresponding with `mi()` terms added as needed.
+#' `brms` formulas representing each latent variable and their corresponding measurement items
 #' 
 #' @export
 #'

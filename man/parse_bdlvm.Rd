@@ -12,10 +12,10 @@ parse_bdlvm(x, ...)
 \item{eval}{Default \code{TRUE}, otherwise returns the deparsed \code{bf()} calls}
 }
 \value{
-A set of \code{brms} formulas corresponding with \code{mi()} terms added as needed.
+\code{brms} formulas representing each latent variable and their corresponding measurement items
 }
 \description{
-Parse a latent variable formula into \code{brms} format
+Constructs a set of \code{brms} formulas that encode latent variables using \code{mi()}
 }
 \examples{
 library(bdlvm)
