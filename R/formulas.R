@@ -46,7 +46,6 @@ rhs_contains <- function(x, y) {
 
 # specific --------------------------------------------------------------
 make_bform <- function(x) {
-
   all_lv <- sapply(x$resp, \(z)z[1])
 
   # make lv|mi() terms
@@ -60,9 +59,20 @@ make_bform <- function(x) {
     sapply(z, \(w) add_mi(w, all_lv))
   })
 
-  bforms <- lapply(bforms, \(z) {
-    paste0("brms::bf(", paste(sapply(z, \(w) deparse(w)), collapse = ", "), ")")
+  bforms <- lapply(seq_along(all_lv), \(i) {
+    paste0("brms::bf(",
+           paste(sapply(bforms[[i]], \(w) deparse(w)), collapse = ", "),
+           {
+             args <- gsub("^expression\\(|\\)$", "",
+                          paste(deparse(as.expression(x$args[[i]])),
+                          collapse = ""))
+             if(identical(args, "NULL"))
+               NULL
+             else
+               paste(",", args)
+           }, ")")
   })
+
   # make item_x ~ mi(lv) terms
   iforms <- lapply(seq_along(all_lv), \(z) {
     prefix <- deparse(x$items[[z]][[2]])
