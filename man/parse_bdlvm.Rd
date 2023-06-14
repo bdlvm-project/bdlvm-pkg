@@ -9,6 +9,8 @@ parse_bdlvm(x, ...)
 \arguments{
 \item{x}{A formula created with \code{\link[=lv]{lv()}}}
 
+\item{...}{Additional parameters to customize item naming and use of censoring/missingness. Currently supports \code{suffix1}, \code{suffix2}, \code{mi}, \code{cens}.}
+
 \item{eval}{Default \code{TRUE}, otherwise returns the deparsed \code{bf()} calls}
 }
 \value{

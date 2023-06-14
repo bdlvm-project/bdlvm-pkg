@@ -4,6 +4,7 @@
 #'
 #' @param x A formula created with [lv()]
 #' @param eval Default `TRUE`, otherwise returns the deparsed `bf()` calls
+#' @param ... Additional parameters to customize item naming and use of censoring/missingness. Currently supports `suffix1`, `suffix2`, `mi`, `cens`.
 #'
 #' @return
 #' `brms` formulas representing each latent variable and their corresponding measurement items
