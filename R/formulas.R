@@ -45,7 +45,8 @@ rhs_contains <- function(x, y) {
 }
 
 # specific --------------------------------------------------------------
-make_bform <- function(x) {
+make_bform <- function(x, suffix1 = "LVi", suffix2 = NULL,
+                       mi = FALSE, cens = FALSE) {
   all_lv <- sapply(x$resp, \(z)z[1])
 
   # make lv|mi() terms
@@ -73,13 +74,19 @@ make_bform <- function(x) {
            }, ")")
   })
 
-  # make item_x ~ mi(lv) terms
   iforms <- lapply(seq_along(all_lv), \(z) {
     prefix <- deparse(x$items[[z]][[2]])
-    suffix <- seq_len(x$items[[z]][[3]])
+    if(is.null(suffix2))suffix2 <- seq_len(x$items[[z]][[3]])
+    if(length(suffix2)!=x$items[[z]][[3]])stop("suffix2 size must match items")
+    iname <- paste0(prefix, suffix1, suffix2)
 
-    iname <- paste0(prefix, "LVi", suffix)
-    paste0("brms::bf(", iname, "| cens(", iname, "c)+ mi() ~ mi(", all_lv[z],"))")
+    separator <- if(mi|cens) "| " else NULL
+    addition <- if(mi&cens) " + " else NULL
+    mi <- if(mi) "mi()" else NULL
+    cens <- if(cens) paste0("cens(", iname, "c)") else NULL
+
+    paste0("brms::bf(", iname, separator, cens, addition, mi,
+           "~ mi(", all_lv[z],"))")
   })
 
   unlist(sapply(seq_along(all_lv), \(z)c(bforms[z], iforms[[z]])))

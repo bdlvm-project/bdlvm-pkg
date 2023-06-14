@@ -1,5 +1,5 @@
 #' Parse a latent variable formula into `brms` format
-#' 
+#'
 #' Constructs a set of `brms` formulas that encode latent variables using `mi()`
 #'
 #' @param x A formula created with [lv()]
@@ -7,7 +7,7 @@
 #'
 #' @return
 #' `brms` formulas representing each latent variable and their corresponding measurement items
-#' 
+#'
 #' @export
 #'
 #' @examples
@@ -23,7 +23,7 @@ parse_bdlvm.bdlvmFormula <- function(x, ..., eval = TRUE) {
   lv_parsed <- parse_bdlvm(x@lv_terms, transpose = TRUE)
   bf_parsed <- parse_bdlvm(x@bf_terms, lv = lv_parsed)
 
-  lv_bform <- make_bform(lv_parsed) # could go into parse_bdlvm
+  lv_bform <- make_bform(lv_parsed, ...)
 
   parsed <- c(lv_bform,
               unlist(bf_parsed))
