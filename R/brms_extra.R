@@ -1,7 +1,7 @@
 # Other extensions to brms functionality e.g. stanvars, NCP, etc.
 #' @export
 bdlvm_stanvars <- {
-stanvar(block = "functions", scode = "
+brms::stanvar(block = "functions", scode = "
 real expgamma_lpdf(real x, real alpha, real beta) {
   return gamma_lpdf(exp(x) | alpha, beta) + x;
 }
