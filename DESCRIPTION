@@ -17,6 +17,7 @@ Collate:
     'S4methods.R'
     'formulas.R'
     'misc.R'
+    'brms_extra.R'
 Imports: 
     brms,
     purrr
