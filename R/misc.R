@@ -1,5 +1,3 @@
-renv_update <- function(){renv::purge("bdlvm");renv::hydrate()}
-
 is_formula <- function(x) {
   UseMethod("is_formula")
 }
