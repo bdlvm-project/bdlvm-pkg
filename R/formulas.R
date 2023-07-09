@@ -2,15 +2,16 @@
 add_mi <- function(f, vars) {
   rhs_terms <- attr(terms(f), "term.labels")
   var_from_term <- lapply(rhs_terms, \(x)all.vars(as.formula(paste0("~", x))))
-  if(!identical(unique(sapply(var_from_term, length)), 1L))
+  if(any(sapply(var_from_term, length)) > 1)
     stop("Found multiple variables in a single term?\nIn:", deparse(f))
   for(v in vars) {
     replace_which <- sapply(var_from_term, \(x) x==v)
+    if(!any(replace_which)|length(replace_which)==0) next
     for(i in rhs_terms[replace_which]) {
       f <- update(f, as.formula(paste(". ~ . -", v, "+", sub(v, paste("mi(", v, ")"), i))))
     }
   }
-  parse(text = deparse(x))[[1]]
+  parse(text = deparse(f))[[1]]
 }
 
 drop_items <- function(x, y) {
@@ -57,7 +58,7 @@ make_bform <- function(x, suffix1 = "LVi", suffix2 = NULL,
 
   # make lv|mi() terms
   bforms <- lapply(x$formulas, \(z) {
-    if(class(z) != "list")z <- list(z)
+    if(!inherits(z, "list")) z <- list(z)
     z[[1]][[2]] <- parse(text = paste(z[[1]][[2]], "| mi()"))[[1]]
     z
   })
