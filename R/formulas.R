@@ -8,7 +8,7 @@ add_mi <- function(f, vars) {
     replace_which <- sapply(var_from_term, \(x) x==v)
     if(!any(replace_which)|length(replace_which)==0) next
     for(i in rhs_terms[replace_which]) {
-      f <- update(f, as.formula(paste(". ~ . -", v, "+", sub(v, paste("mi(", v, ")"), i))))
+      f <- update(f, as.formula(paste(". ~ . -", i, "+", sub(v, paste("mi(", v, ")"), i))))
     }
   }
   parse(text = deparse(f))[[1]]
