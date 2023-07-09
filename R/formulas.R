@@ -1,8 +1,14 @@
 # general helpers --------------------------------------------------------------
-add_mi <- function(x, y) {
-  for(i in y) {
-    if(rhs_contains(x, i))
-      x <- update(x, as.formula(paste(". ~ . -", i, "+ mi(", i, ")")))
+add_mi <- function(f, vars) {
+  rhs_terms <- attr(terms(f), "term.labels")
+  var_from_term <- lapply(rhs_terms, \(x)all.vars(as.formula(paste0("~", x))))
+  if(!identical(unique(sapply(var_from_term, length)), 1L))
+    stop("Found multiple variables in a single term?\nIn:", deparse(f))
+  for(v in vars) {
+    replace_which <- sapply(var_from_term, \(x) x==v)
+    for(i in rhs_terms[replace_which]) {
+      f <- update(f, as.formula(paste(". ~ . -", v, "+", sub(v, paste("mi(", v, ")"), i))))
+    }
   }
   parse(text = deparse(x))[[1]]
 }
