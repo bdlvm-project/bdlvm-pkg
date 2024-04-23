@@ -1,0 +1,25 @@
+Package: bdlvm
+Type: Package
+Title: Use Brms For Bayesian Latent Variable Modeling
+Version: 0.1.0
+Author: Luna Fazio
+Maintainer: Luna Fazio <bmfazio@gmail.com>
+Description: Wrappers for latent variable models in `brms`
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Collate: 
+    'S3methods.R'
+    'classes.R'
+    'S4methods.R'
+    'bdlvm-package.R'
+    'brms_extra.R'
+    'formulas.R'
+    'misc.R'
+Imports: 
+    brms,
+    methods,
+    purrr,
+    stats
